@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رمضان مبارك 🌙</title>
+    <style>
+        /* ========== إعدادات عامة ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1047 50%, #2d1b69 100%);
+            position: relative;
+            direction: rtl;
+        }
+
+        /* ========== خلفية النجوم ========== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s infinite;
+        }
+
+        /* تأثير تلألؤ النجوم */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ========== السحب المتحركة ========== */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            filter: blur(40px);
+            animation: floatCloud linear infinite;
+        }
+
+        .cloud:nth-child(1) {
+            width: 300px;
+            height: 100px;
+            top: 20%;
+            left: -300px;
+            animation-duration: 60s;
+        }
+
+        .cloud:nth-child(2) {
+            width: 400px;
+            height: 120px;
+            top: 50%;
+            left: -400px;
+            animation-duration: 80s;
+            animation-delay: 10s;
+        }
+
+        .cloud:nth-child(3) {
+            width: 350px;
+            height: 110px;
+            top: 70%;
+            left: -350px;
+            animation-duration: 70s;
+            animation-delay: 20s;
+        }
+
+        @keyframes floatCloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 400px)); }
+        }
+
+        /* ========== شاشة الترحيب ========== */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1047 50%, #2d1b69 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-content {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #e8e8e8;
+            margin-bottom: 30px;
+        }
+
+        .music-note {
+            font-size: 0.9rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px solid #ffd700;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .name-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ========== أزرار اختيار الجنس ========== */
+        .gender-label {
+            font-size: 1.1rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .gender-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .gender-btn {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8e8e8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gender-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+        }
+
+        .gender-btn.selected {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: #1a1047;
+            border-color: #ffd700;
+            font-weight: bold;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: #1a1047;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+        }
+
+        .start-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ========== الحاوية الرئيسية ========== */
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ========== الهلال ========== */
+        .crescent {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 120px;
+            height: 120px;
+            opacity: 0;
+            animation: fadeInCrescent 2s ease-out 0.5s forwards, floatCrescent 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes fadeInCrescent {
+            to { opacity: 1; }
+        }
+
+        @keyframes floatCrescent {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* ========== الفوانيس ========== */
+        .lanterns {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            z-index: 3;
+        }
+
+        .lantern {
+            width: 60px;
+            height: 80px;
+            opacity: 0;
+            animation: fadeInLantern 1.5s ease-out forwards, swingLantern 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .lantern:nth-child(1) { animation-delay: 1s, 1s; }
+        .lantern:nth-child(2) { animation-delay: 1.3s, 1.3s; }
+        .lantern:nth-child(3) { animation-delay: 1.6s, 1.6s; }
+
+        @keyframes fadeInLantern {
+            to { opacity: 1; }
+        }
+
+        @keyframes swingLantern {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* ========== المحتوى الرئيسي ========== */
+        .main-content {
+            text-align: center;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== العنوان الرئيسي ========== */
+        .main-title {
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+                         0 0 40px rgba(255, 215, 0, 0.3);
+            animation: glowTitle 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowTitle {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5); }
+        }
+
+        /* ========== رسالة التهنئة ========== */
+        .greeting-message {
+            font-size: 1.5rem;
+            color: #e8e8e8;
+            line-height: 2;
+            margin-bottom: 50px;
+            padding: 0 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ========== الزر ========== */
+        .blessing-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: #1a1047;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blessing-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .blessing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+        }
+
+        .blessing-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .blessing-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ========== صندوق الدعاء ========== */
+        .dua-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, rgba(26, 16, 71, 0.95) 0%, rgba(45, 27, 105, 0.95) 100%);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .dua-box.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .dua-text {
+            font-size: 1.8rem;
+            color: #ffd700;
+            line-height: 2.2;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .close-btn {
+            background: #d4af37;
+            color: #1a1047;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .close-btn:hover {
+            background: #f4d03f;
+            transform: scale(1.05);
+        }
+
+        /* ========== تأثير الأنوار الذهبية ========== */
+        .golden-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .golden-lights.active {
+            opacity: 1;
+        }
+
+        .light {
+            position: absolute;
+            animation: fallLight linear forwards;
+        }
+
+        /* أنواع مختلفة من الأنوار */
+        .light-line {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.9), transparent);
+            border-radius: 50%;
+        }
+
+        .light-thick {
+            width: 4px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+            border-radius: 50%;
+        }
+
+        .light-dot {
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0.3));
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .light-star {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+        }
+
+        .light-spark {
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(255, 165, 0, 0.9), transparent);
+            border-radius: 50%;
+        }
+
+        @keyframes fallLight {
+            from {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ========== خلفية تعتيم ========== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ========== زر الموسيقى ========== */
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInButton 0.5s ease-out 2s forwards;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .music-toggle.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes fadeInButton {
+            to { opacity: 1; }
+        }
+
+        /* ========== تصميم متجاوب ========== */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3rem;
+            }
+
+            .greeting-message {
+                font-size: 1.2rem;
+            }
+
+            .blessing-btn {
+                font-size: 1.1rem;
+                padding: 15px 35px;
+            }
+
+            .dua-text {
+                font-size: 1.4rem;
+            }
+
+            .crescent {
+                width: 80px;
+                height: 80px;
+                top: 5%;
+                right: 5%;
+            }
+
+            .lantern {
+                width: 40px;
+                height: 60px;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1rem;
+            }
+
+            .name-input {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+
+            .start-btn {
+                font-size: 1.1rem;
+                padding: 15px 35px;
+            }
+
+            .gender-btn {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .greeting-message {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .dua-text {
+                font-size: 1.2rem;
+                line-height: 2;
+            }
+
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .start-btn {
+                font-size: 1rem;
+                padding: 12px 30px;
+            }
+
+            .welcome-content {
+                padding: 30px 20px;
+            }
+
+            .gender-buttons {
+                gap: 10px;
+            }
+
+            .gender-btn {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+
+            .gender-label {
+                font-size: 1rem;
+            }
+
+            .music-toggle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                bottom: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة الترحيب -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">🌙 أهلاً وسهلاً 🌙</h1>
+            <p class="welcome-subtitle">أدخل اسمك لنبدأ الاحتفال برمضان</p>
+            <p class="music-note">🎵 سيتم تشغيل أنشودة رمضانية جميلة</p>
+            <input type="text" class="name-input" id="nameInput" placeholder="اسمك الكريم..." maxlength="20">
+            
+            <label class="gender-label">اختر:</label>
+            <div class="gender-buttons">
+                <button class="gender-btn selected" id="maleBtn" onclick="selectGender('male')">👨 أخ</button>
+                <button class="gender-btn" id="femaleBtn" onclick="selectGender('female')">👩 أخت</button>
+            </div>
+            
+            <button class="start-btn" onclick="startExperience()">🎉 ابدأ الآن 🎉</button>
+        </div>
+    </div>
+
+    <!-- طبقة النجوم -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- طبقة السحب -->
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+
+    <!-- الهلال -->
+    <svg class="crescent" viewBox="0 0 100 100">
+        <path d="M50 10 C30 10, 15 25, 15 50 C15 75, 30 90, 50 90 C40 90, 30 80, 30 50 C30 20, 40 10, 50 10 Z" 
+              fill="#ffd700" stroke="#f4d03f" stroke-width="2"/>
+    </svg>
+
+    <!-- الفوانيس -->
+    <div class="lanterns">
+        <svg class="lantern" viewBox="0 0 60 80">
+            <!-- حبل الفانوس -->
+            <line x1="30" y1="0" x2="30" y2="15" stroke="#d4af37" stroke-width="2"/>
+            <!-- جسم الفانوس -->
+            <path d="M20 15 L15 25 L15 55 L20 65 L40 65 L45 55 L45 25 L40 15 Z" 
+                  fill="#d4af37" stroke="#b8860b" stroke-width="2"/>
+            <!-- الضوء -->
+            <ellipse cx="30" cy="40" rx="8" ry="12" fill="#ffed4e" opacity="0.8">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <!-- القاعدة -->
+            <path d="M18 65 L18 70 L42 70 L42 65" fill="#b8860b"/>
+        </svg>
+        
+        <svg class="lantern" viewBox="0 0 60 80">
+            <line x1="30" y1="0" x2="30" y2="15" stroke="#d4af37" stroke-width="2"/>
+            <path d="M20 15 L15 25 L15 55 L20 65 L40 65 L45 55 L45 25 L40 15 Z" 
+                  fill="#d4af37" stroke="#b8860b" stroke-width="2"/>
+            <ellipse cx="30" cy="40" rx="8" ry="12" fill="#ffed4e" opacity="0.8">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+            </ellipse>
+            <path d="M18 65 L18 70 L42 70 L42 65" fill="#b8860b"/>
+        </svg>
+        
+        <svg class="lantern" viewBox="0 0 60 80">
+            <line x1="30" y1="0" x2="30" y2="15" stroke="#d4af37" stroke-width="2"/>
+            <path d="M20 15 L15 25 L15 55 L20 65 L40 65 L45 55 L45 25 L40 15 Z" 
+                  fill="#d4af37" stroke="#b8860b" stroke-width="2"/>
+            <ellipse cx="30" cy="40" rx="8" ry="12" fill="#ffed4e" opacity="0.8">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="1s"/>
+            </ellipse>
+            <path d="M18 65 L18 70 L42 70 L42 65" fill="#b8860b"/>
+        </svg>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <div class="main-content">
+            <h1 class="main-title">🌙 رمضان مبارك 🌙</h1>
+            <p class="greeting-message">
+                إلى أصدقائنا وأحبابنا...<br>
+                نسأل الله أن يملأ قلوبكم نورًا، وأن يجعل أيامكم سعادة،<br>
+                وأن يبلغنا وإياكم رمضان لا فاقدين ولا مفقودين
+            </p>
+            <button class="blessing-btn" onclick="showDua()">✨ اضغط لتظهر دعوة جميلة ✨</button>
+        </div>
+    </div>
+
+    <!-- خلفية التعتيم -->
+    <div class="overlay" id="overlay" onclick="closeDua()"></div>
+
+    <!-- صندوق الدعاء -->
+    <div class="dua-box" id="duaBox">
+        <p class="dua-text">
+            اللهم بلغنا رمضان وأنت راضٍ عنا<br>
+            واجعلنا فيه من المقبولين والفائزين<br>
+            وارزقنا فيه صيامه وقيامه إيمانًا واحتسابًا<br>
+            آمين يا رب العالمين 🤲
+        </p>
+        <button class="close-btn" onclick="closeDua()">إغلاق</button>
+    </div>
+
+    <!-- طبقة الأنوار الذهبية -->
+    <div class="golden-lights" id="goldenLights"></div>
+
+    <!-- زر تشغيل/إيقاف الموسيقى -->
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()" title="تشغيل/إيقاف الموسيقى">
+        🎵
+    </button>
+
+    <!-- عنصر الصوت -->
+    <audio id="ramadanAudio" loop preload="auto">
+        <source src="ramadan.mp3" type="audio/mpeg">
+        <source src="ramadan.ogg" type="audio/ogg">
+        متصفحك لا يدعم تشغيل الصوت
+    </audio>
+
+    <script>
+        // ========== متغيرات عامة ==========
+        let userName = '';
+        let userGender = 'male';
+        let isPlaying = false;
+        let audioElement;
+
+        // ========== تهيئة عنصر الصوت ==========
+        window.addEventListener('DOMContentLoaded', () => {
+            audioElement = document.getElementById('ramadanAudio');
+            
+            if (audioElement) {
+                audioElement.volume = 0.4;
+                audioElement.load(); // تحميل الصوت مسبقاً
+                
+                console.log('✅ تم تحميل عنصر الصوت بنجاح');
+                console.log('📁 مصدر الملف:', audioElement.src);
+                console.log('🎵 جاهز للتشغيل:', audioElement.readyState);
+                
+                // التحقق من تحميل الصوت
+                audioElement.addEventListener('canplaythrough', () => {
+                    console.log('✅ الملف الصوتي جاهز للتشغيل الكامل');
+                });
+                
+                audioElement.addEventListener('error', (e) => {
+                    console.error('❌ خطأ في تحميل الملف الصوتي:', e);
+                    console.error('تفاصيل الخطأ:', audioElement.error);
+                });
+            } else {
+                console.error('❌ لم يتم العثور على عنصر الصوت!');
+            }
+        });
+
+        // ========== اختيار الجنس ==========
+        function selectGender(gender) {
+            userGender = gender;
+            
+            // تحديث مظهر الأزرار
+            document.getElementById('maleBtn').classList.remove('selected');
+            document.getElementById('femaleBtn').classList.remove('selected');
+            
+            if (gender === 'male') {
+                document.getElementById('maleBtn').classList.add('selected');
+            } else {
+                document.getElementById('femaleBtn').classList.add('selected');
+            }
+            
+            console.log('تم اختيار الجنس:', gender);
+        }
+
+        // ========== تبديل تشغيل الموسيقى ==========
+        function toggleMusic() {
+            const musicBtn = document.getElementById('musicToggle');
+            
+            if (!audioElement) {
+                console.error('❌ عنصر الصوت غير موجود!');
+                alert('عذراً، عنصر الصوت غير متوفر');
+                return;
+            }
+            
+            if (isPlaying) {
+                // إيقاف الموسيقى
+                audioElement.pause();
+                isPlaying = false;
+                musicBtn.textContent = '🔇';
+                musicBtn.classList.remove('playing');
+                console.log('⏸️ تم إيقاف الصوت');
+            } else {
+                // تشغيل الموسيقى
+                console.log('▶️ محاولة تشغيل الصوت...');
+                const playPromise = audioElement.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            isPlaying = true;
+                            musicBtn.textContent = '🎵';
+                            musicBtn.classList.add('playing');
+                            console.log('✅ تم تشغيل الصوت بنجاح!');
+                        })
+                        .catch(error => {
+                            console.error('❌ فشل تشغيل الصوت:', error.name);
+                            console.error('رسالة الخطأ:', error.message);
+                            
+                            let errorMsg = 'لا يمكن تشغيل الصوت';
+                            if (error.name === 'NotAllowedError') {
+                                errorMsg = 'المتصفح منع تشغيل الصوت التلقائي';
+                            } else if (error.name === 'NotSupportedError') {
+                                errorMsg = 'تنسيق الملف الصوتي غير مدعوم';
+                            }
+                            
+                            alert(errorMsg + '\n\nجرب الضغط على الزر مرة أخرى');
+                        });
+                }
+            }
+        }
+
+        // ========== بدء التجربة ==========
+        function startExperience() {
+            const nameInput = document.getElementById('nameInput');
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            
+            // حفظ الاسم
+            userName = nameInput.value.trim();
+            
+            // إذا لم يُدخل اسم، استخدم القيمة الافتراضية حسب الجنس
+            if (!userName) {
+                userName = userGender === 'male' ? 'أخي الكريم' : 'أختي الكريمة';
+            }
+            
+            console.log('👤 الاسم المُدخل:', userName);
+            console.log('👥 الجنس:', userGender);
+            
+            // محاولة تشغيل الصوت
+            if (audioElement) {
+                console.log('🎵 محاولة تشغيل الأنشودة...');
+                audioElement.volume = 0.4;
+                
+                const playPromise = audioElement.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('✅ تم تشغيل الأنشودة بنجاح!');
+                            isPlaying = true;
+                            
+                            // تحديث زر الموسيقى
+                            setTimeout(() => {
+                                const musicBtn = document.getElementById('musicToggle');
+                                musicBtn.classList.add('playing');
+                            }, 2000);
+                        })
+                        .catch(error => {
+                            console.error('❌ فشل تشغيل الأنشودة:', error.name);
+                            console.error('التفاصيل:', error.message);
+                            console.log('💡 يمكن للمستخدم تشغيل الصوت يدوياً من الزر');
+                        });
+                }
+            } else {
+                console.error('❌ عنصر الصوت غير موجود!');
+            }
+            
+            // إخفاء شاشة الترحيب
+            welcomeScreen.classList.add('hidden');
+            
+            // تحديث الرسالة الرئيسية لتشمل الاسم
+            updateGreeting();
+        }
+
+        // ========== تحديث الرسالة لتتضمن الاسم ==========
+        function updateGreeting() {
+            const greetingMessage = document.querySelector('.greeting-message');
+            
+            // النصوص حسب الجنس
+            const brotherSister = userGender === 'male' ? 'أخي الكريم' : 'أختي الكريمة';
+            const yourHeart = userGender === 'male' ? 'قلبك' : 'قلبك';
+            const yourDays = userGender === 'male' ? 'أيامك' : 'أيامك';
+            const you = userGender === 'male' ? 'وإياك' : 'وإياك';
+            
+            if (userName && userName !== 'أخي الكريم' && userName !== 'أختي الكريمة') {
+                greetingMessage.innerHTML = `
+                    ${brotherSister} <strong style="color: #ffd700;">${userName}</strong>...<br>
+                    نسأل الله أن يملأ ${yourHeart} نورًا، وأن يجعل ${yourDays} سعادة،<br>
+                    وأن يبلغنا ${you} رمضان لا فاقدين ولا مفقودين
+                `;
+            } else {
+                greetingMessage.innerHTML = `
+                    ${brotherSister}...<br>
+                    نسأل الله أن يملأ ${yourHeart} نورًا، وأن يجعل ${yourDays} سعادة،<br>
+                    وأن يبلغنا ${you} رمضان لا فاقدين ولا مفقودين
+                `;
+            }
+        }
+
+        // ========== إنشاء النجوم المتحركة ==========
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // موضع عشوائي
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // حجم عشوائي
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                // تأخير عشوائي للتلألؤ
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // ========== إظهار صندوق الدعاء ==========
+        function showDua() {
+            const duaBox = document.getElementById('duaBox');
+            const overlay = document.getElementById('overlay');
+            const goldenLights = document.getElementById('goldenLights');
+            const duaText = document.querySelector('.dua-text');
+
+            // النصوص حسب الجنس
+            const himHer = userGender === 'male' ? 'عنه' : 'عنها';
+            const makeHim = userGender === 'male' ? 'واجعله' : 'واجعلها';
+            const giveHim = userGender === 'male' ? 'وارزقه' : 'وارزقها';
+            const his = userGender === 'male' ? 'صيامه وقيامه' : 'صيامها وقيامها';
+
+            // تحديث الدعاء ليشمل الاسم والجنس المناسب
+            if (userName && userName !== 'أخي الكريم' && userName !== 'أختي الكريمة') {
+                duaText.innerHTML = `
+                    اللهم بلغ <strong style="color: #fff;">${userName}</strong> رمضان وأنت راضٍ ${himHer}<br>
+                    ${makeHim} فيه من المقبولين والفائزين<br>
+                    ${giveHim} فيه ${his} إيمانًا واحتسابًا<br>
+                    آمين يا رب العالمين 🤲
+                `;
+            } else {
+                // صيغة الجمع
+                duaText.innerHTML = `
+                    اللهم بلغنا رمضان وأنت راضٍ عنا<br>
+                    واجعلنا فيه من المقبولين والفائزين<br>
+                    وارزقنا فيه صيامه وقيامه إيمانًا واحتسابًا<br>
+                    آمين يا رب العالمين 🤲
+                `;
+            }
+
+            // إظهار الصندوق والخلفية
+            duaBox.classList.add('show');
+            overlay.classList.add('show');
+
+            // إنشاء الأنوار الذهبية
+            createGoldenLights();
+            goldenLights.classList.add('active');
+
+            // إزالة الأنوار بعد 9 ثواني
+            setTimeout(() => {
+                goldenLights.classList.remove('active');
+                setTimeout(() => {
+                    goldenLights.innerHTML = '';
+                }, 500);
+            }, 9000);
+        }
+
+        // ========== إغلاق صندوق الدعاء ==========
+        function closeDua() {
+            const duaBox = document.getElementById('duaBox');
+            const overlay = document.getElementById('overlay');
+
+            duaBox.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+
+        // ========== إنشاء الأنوار الذهبية ==========
+        function createGoldenLights() {
+            const goldenLights = document.getElementById('goldenLights');
+            goldenLights.innerHTML = '';
+            const numberOfLights = 40;
+            
+            // أنواع الأنوار المختلفة
+            const lightTypes = ['light-line', 'light-thick', 'light-dot', 'light-star', 'light-spark'];
+
+            for (let i = 0; i < numberOfLights; i++) {
+                const light = document.createElement('div');
+                light.className = 'light';
+                
+                // اختيار نوع عشوائي من الأنوار
+                const randomType = lightTypes[Math.floor(Math.random() * lightTypes.length)];
+                light.classList.add(randomType);
+                
+                // موضع أفقي عشوائي
+                light.style.left = Math.random() * 100 + '%';
+                
+                // سرعة عشوائية أبطأ (من 5 إلى 9 ثواني)
+                const duration = (Math.random() * 4 + 5).toFixed(1);
+                light.style.animationDuration = duration + 's';
+                
+                // تأخير عشوائي
+                light.style.animationDelay = (Math.random() * 2).toFixed(1) + 's';
+                
+                // شفافية عشوائية
+                const opacity = (Math.random() * 0.4 + 0.6).toFixed(2);
+                light.style.opacity = opacity;
+                
+                goldenLights.appendChild(light);
+            }
+        }
+
+        // ========== تشغيل عند تحميل الصفحة ==========
+        window.addEventListener('load', () => {
+            createStars();
+            
+            // إضافة أنوار خفيفة عشوائية كل فترة
+            setInterval(() => {
+                createRandomLight();
+            }, 5000);
+
+            // السماح بالضغط على Enter في حقل الاسم
+            const nameInput = document.getElementById('nameInput');
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    startExperience();
+                }
+            });
+            
+            // تركيز تلقائي على حقل الاسم
+            nameInput.focus();
+            
+            console.log('📄 تم تحميل الصفحة بالكامل');
+        });
+
+        // ========== إنشاء ضوء عشوائي خفيف ==========
+        function createRandomLight() {
+            const container = document.body;
+            const light = document.createElement('div');
+            light.className = 'light';
+            
+            const lightTypes = ['light-line', 'light-dot', 'light-spark'];
+            const randomType = lightTypes[Math.floor(Math.random() * lightTypes.length)];
+            light.classList.add(randomType);
+            
+            light.style.position = 'fixed';
+            light.style.left = Math.random() * 100 + '%';
+            light.style.top = '-100px';
+            light.style.zIndex = '1';
+            light.style.opacity = '0.3';
+            light.style.animationDuration = '7s';
+            light.style.pointerEvents = 'none';
+            
+            container.appendChild(light);
+            
+            // إزالة الضوء بعد انتهاء الحركة
+            setTimeout(() => {
+                light.remove();
+            }, 7000);
+        }
+
+        // ========== إغلاق الصندوق بزر Escape ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDua();
+            }
+        });
+    </script>
+</body>
+</html>
